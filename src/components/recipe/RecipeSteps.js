@@ -2,7 +2,7 @@ import React from 'react';
 import { Header, Paragraph } from 'flotiq-components-react';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-const RecipeSteps = ({ images }) => (
+const RecipeSteps = ({ title, images }) => (
     <div className='py-6'> 
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {images.map((image, index) => (
@@ -11,7 +11,7 @@ const RecipeSteps = ({ images }) => (
                     && (
                         <GatsbyImage
                             image={getImage(image.localFile)}
-                            alt={"asd"}
+                            alt={title}
                             className="w-full pb-5 md:pb-10"
                         />
                     )}
