@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { graphql } from 'gatsby';
 import { Header, List, Paragraph } from 'flotiq-components-react';
 import { Helmet } from 'react-helmet';
@@ -14,7 +14,30 @@ const RecipeTemplate = ({ data }) => {
     const { popup } = data;
     const popups = data.allPopup.nodes;
 
-    console.log(popup)
+    useEffect(() => {
+        const script = document.createElement('script');
+    
+        script.async = true;
+        script.src = "https://dapi.kakao.com/v2/maps/sdk.js?appkey=0d55b50b99b8d406560d185b443f265c&autoload=false";
+    
+        document.head.appendChild(script);
+    
+        script.onload = () => {
+            kakao.maps.load(() => {
+                let el = document.getElementById('map');
+                let map = new kakao.maps.Map(el, {
+                    center: new kakao.maps.LatLng(popup.geo.lat, popup.geo.lon)
+                })
+
+                let marker = new kakao.maps.Marker({
+                    position: new kakao.maps.LatLng(popup.geo.lat, popup.geo.lon)
+                });
+
+                marker.setMap(map);
+            });
+        };
+    }, []);  
+
     return (
         <Layout additionalClass={['bg-light-gray']}>
             <Helmet>
@@ -23,6 +46,7 @@ const RecipeTemplate = ({ data }) => {
                     name="description"
                     content={popup.description}
                 />
+                
             </Helmet>
             <div className="flex flex-wrap max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <RecipeBackButton additionalClass={['mt-12 mb-5 uppercase']} backButtonText="Go back" />
@@ -63,8 +87,14 @@ const RecipeTemplate = ({ data }) => {
                         {popup.description}
                     </ReactMarkdown>
                 </div>
+                <div id="map" className="flex flex-col basis-full pl-0 lg:pl-12 pt-48 pb-10 bg-white my-4" >
+                    123
+                </div> 
             </div>
+            
+            
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+                
                 <RecipeSteps title={popup.title} images={popup.images} />
             </div>
             {/* <HeaderImageWithText
@@ -107,6 +137,10 @@ export const pageQuery = graphql`
             open_time
             tags {
                 name
+            }
+            geo {
+                lat
+                lon
             }
             images {
                 localFile {

@@ -12,7 +12,7 @@ require('dotenv').config({
 module.exports = {
     siteMetadata: {
         title: 'POP-UP GO',
-        description: '대한민국의 팝업스토어를 모두 모아 보여드립니다.',
+        description: '팝업스토어 모음, 팝업고와 함께',
         siteUrl: 'https://popupgo.kr',
     },
     plugins: [
@@ -34,6 +34,12 @@ module.exports = {
                     respectDNT: true,
                     exclude: ['/preview/**', '/do-not-track/me/too/'],
                 },
+            },
+        },
+        {
+            resolve: `gatsby-plugin-google-adsense`,
+            options: {
+                publisherId: `ca-pub-4051015339001057`
             },
         },
         'gatsby-plugin-react-helmet',

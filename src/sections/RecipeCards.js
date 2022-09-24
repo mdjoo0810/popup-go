@@ -8,8 +8,9 @@ const RecipeCards = ({ popups, headerText }) => (
             {headerText}
         </Header>
         <div className="flex flex-wrap justify-start">
-            {popups.map((popup) => (
+            {popups.map((popup, index) => (
                 <RecipeCard
+                    key={index}
                     id={popup.id} 
                     title={popup.title} 
                     thumbnail={popup.thumbnail[0]?.localFile} 
