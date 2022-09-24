@@ -10,8 +10,8 @@ const IndexPage = ({ data, pageContext }) => {
     const popupMap = {};
 
     let now = new Date();
-    let date = new Date(now.setMonth(now.getMonth()+3));
-    for (let index = 1; index <= 12; index++) {
+    let date = new Date(now.setMonth(now.getMonth()+1));
+    for (let index = 1; index <= 6; index++) {
         const month = date.getMonth() + 1
         const key = `${date.getFullYear()}.${month >= 10 ? month : '0' + month}`
         popupMap[key] = []
