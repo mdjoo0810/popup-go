@@ -11,9 +11,9 @@ require('dotenv').config({
 
 module.exports = {
     siteMetadata: {
-        title: 'Flotiq recipe starter for Gatsby',
-        description: 'Flotiq recipe starter for Gatsby',
-        siteUrl: 'https://flotiqgatsbyrecipe2.gatsbyjs.io',
+        title: 'POP-UP GO',
+        description: '대한민국의 팝업스토어를 모두 모아 보여드립니다.',
+        siteUrl: 'https://popupgo.kr',
     },
     plugins: [
         {
@@ -47,7 +47,7 @@ module.exports = {
                 includeTypes: [
                     '_media',
                     '_tag',
-                    'recipe',
+                    'popup',
                 ],
             },
         },

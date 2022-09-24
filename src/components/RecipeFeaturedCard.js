@@ -10,8 +10,8 @@ const CustomRecipeFeaturedCard = ({ preparationTime, portions, title, excerpt, t
         rounded="none"
         additionalClasses={['mb-4 max-w-7xl mx-auto ']}
         proportionsForHorizontal={{
-            body: '2/5',
-            img: '3/5',
+            body: '2/4',
+            img: '2/4',
             breakpoint: 'lg',
         }}
     >
@@ -44,23 +44,22 @@ const CustomRecipeFeaturedCard = ({ preparationTime, portions, title, excerpt, t
                     />
                 </Link>
             </div>
-            {/* Uncomment this to add tags to your recipes */}
-            {/* <div className="w-full"> */}
-            {/*    <div className="flex flex-wrap justify-start text-sm font-light mt-5"> */}
-            {/*        {tags && tags.map((tag) => ( */}
-            {/*            <a */}
-            {/*                href="/" */}
-            {/*                className="mr-7 my-1 py-2 inline-flex items-center justify-center */}
-            {/*        rounded-md underline text-sm font-light hover:text-secondary" */}
-            {/*            > */}
-            {/*                {tag} */}
-            {/*            </a> */}
-            {/*        ))} */}
-            {/*    </div> */}
-            {/* </div> */}
+            {/* <div className="w-full">
+               <div className="flex flex-wrap justify-start text-sm font-light mt-5">
+                   {tags && tags.map((tag) => (
+                        <a 
+                            href="/" 
+                            className="mr-7 my-1 py-2 inline-flex items-center justify-center 
+                    rounded-md underline text-sm font-light hover:text-secondary" 
+                        > 
+                            {tag} 
+                        </a> 
+                    ))} 
+                </div> 
+             </div>  */}
         </Card.Body>
         <div
-            className="w-full lg:w-auto order-1 lg:order-2 lg:basis-3/5"
+            className="w-full lg:w-auto order-1 lg:order-2 lg:basis-2/4"
         >
             <Link to={`/${slug}`}>
                 <GatsbyImage

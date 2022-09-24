@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link } from 'gatsby';
-import { Image, PoweredByFlotiq } from 'flotiq-components-react';
-import Logo from '../assets/recipe-logo.svg';
+// import { Link } from 'gatsby';
+// import { Image, PoweredByFlotiq } from 'flotiq-components-react';
+// import Logo from '../assets/recipe-logo.svg';
 
 const instagramPath = 'M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772'
     + ' 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.0'
@@ -95,10 +95,10 @@ const Footer = () => (
         <div className="md:w-auto px-5 md:px-0 mt-8
                 flex flex-col items-center space-y-5 md:space-y-8"
         >
-            <Link to="/">
+            {/* <Link to="/">
                 <Image url={Logo} additionalClasses={['block h-8 w-auto md:h-10 w-auto']} alt="Logo" />
-            </Link>
-            <div className="flex items-center justify-center space-x-4 md:space-x-3">
+            </Link> */}
+            {/* <div className="flex items-center justify-center space-x-4 md:space-x-3">
                 {navigation.social.map((item) => (
                     <a
                         key={item.name}
@@ -111,15 +111,14 @@ const Footer = () => (
                         <item.icon className="h-6 w-6" aria-hidden="true" />
                     </a>
                 ))}
-            </div>
+            </div> */}
         </div>
         <div className="font-sora w-auto px-2 md:px-5 py-5 mt-20
                 inline-flex justify-between md:justify-center items-center
                 bg-light-gray rounded-t-lg"
         >
-            <PoweredByFlotiq />
             <p className="text-center text-xs md:text-base font-light">
-                Copyright &copy; Flotiq 2022
+                Copyright &copy; POP-UP GO 2022
             </p>
         </div>
     </footer>

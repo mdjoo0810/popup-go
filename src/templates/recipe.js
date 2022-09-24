@@ -3,23 +3,24 @@ import { graphql } from 'gatsby';
 import { Header, List, Paragraph } from 'flotiq-components-react';
 import { Helmet } from 'react-helmet';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
+import ReactMarkdown from "react-markdown";
 import Layout from '../layouts/layout';
 import RecipeBackButton from '../components/recipe/RecipeBackButton';
-import RecipeSteps from '../components/recipe/RecipeSteps';
-import HeaderImageWithText from '../components/recipe/HeaderImageWithText';
+// import RecipeSteps from '../components/recipe/RecipeSteps';
+// import HeaderImageWithText from '../components/recipe/HeaderImageWithText';
 import RecipeCards from '../sections/RecipeCards';
 
 const RecipeTemplate = ({ data }) => {
-    const { recipe } = data;
-    const recipes = data.allRecipe.nodes;
+    const { popup } = data;
+    const popups = data.allPopup.nodes;
 
     return (
         <Layout additionalClass={['bg-light-gray']}>
             <Helmet>
-                <title>{recipe.name}</title>
+                <title>{popup.title}</title>
                 <meta
                     name="description"
-                    content={recipe.description}
+                    content={popup.description}
                 />
             </Helmet>
             <div className="flex flex-wrap max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -30,71 +31,64 @@ const RecipeTemplate = ({ data }) => {
                     className="flex basis-full lg:basis-1/2"
                 >
                     <GatsbyImage
-                        image={getImage(recipe.image[0].localFile)}
-                        alt={recipe.name}
+                        image={getImage(popup.thumbnail[0].localFile)}
+                        alt={popup.title}
                         className="w-full"
                     />
                 </div>
                 <div className="flex flex-col basis-full lg:basis-1/2 pl-0 lg:pl-12 pt-5 pb-10 bg-white">
                     <div className="flex flex-wrap justify-start text-sm font-light space-x-5 py-5">
                         <p className="px-4 py-3 bg-light-gray">
-                            Time:
+                            일정:
                             {' '}
                             <span className="font-semibold">
-                                {recipe.cookingTime}
+                                {`${popup.start_date.split("-")[1]}/${popup.start_date.split("-")[2]}-${popup.end_date.split("-")[1]}/${popup.end_date.split("-")[2]}`}
                             </span>
                         </p>
-                        <p className="px-4 py-3 bg-light-gray">
-                            Portions:
-                            {' '}
-                            <span className="font-semibold">{recipe.servings}</span>
-                        </p>
                     </div>
-                    <Header additionalClasses={['text-xl md:text-5xl text-secondary !font-normal']}>
-                        {recipe.name}
+                    <Header additionalClasses={['text-xl md:text-5xl text-primary !font-normal']}>
+                        {popup.title}
                     </Header>
                     <Paragraph>
-                        {recipe.description}
+                        {popup.address}
                     </Paragraph>
-                    <Header level={4} additionalClasses={['uppercase mt-16 mb-10']}>
-                        Ingredients:
+                    <Paragraph>
+                        {popup.open_time}
+                    </Paragraph>
+                    <Header level={4} additionalClasses={['uppercase mt-8 mb-2']}>
+                        설명
                     </Header>
-                    <List
-                        items={recipe.ingredients.map((ingredient) => (
-                            { content: `${ingredient.amount} ${ingredient.unit} ${ingredient.product}` }
-                        ))}
-                    />
+                    <ReactMarkdown>
+                        {popup.description}
+                    </ReactMarkdown>
                 </div>
             </div>
-            <div className="flex flex-wrap max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-                <RecipeSteps steps={recipe.steps} additionalClass={['my-5']} headerText="Steps:" />
-            </div>
-            <HeaderImageWithText
+            {/* <div className="flex flex-wrap max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+                <RecipeSteps steps={recipe.steps} additionalClass={['my-5']} />
+            </div> */}
+            {/* <HeaderImageWithText
                 recipe={recipe}
                 headerText1="Enjoy"
                 headerText2="your"
                 headerText3="meal!"
-            />
-            <RecipeCards recipes={recipes} headerText="Next recipe to cook:" />
+            /> */}
+            <RecipeCards popups={popups} headerText="최근 오픈한 팝업 스토어" />
         </Layout>
     );
 };
 
 export const pageQuery = graphql`
-    query PortfolioProjectBySlug($slug: String!) {
+    query PortfolioProjectById($id: String!) {
         site {
             siteMetadata {
                 title
             }
         }
-        recipe( slug: { eq: $slug } ) {
+        popup( id: { eq: $id } ) {
             id
-            cookingTime
+            title
             description
-            name
-            slug
-            servings
-            image {
+            thumbnail {
                 extension
                 url
                 width
@@ -106,32 +100,32 @@ export const pageQuery = graphql`
                     }
                 }
             }
-            ingredients {
-                amount
-                unit
-                product
+            address
+            end_date
+            start_date
+            open_time
+            tags {
+                name
             }
-            steps {
-                image {
-                    localFile {
-                        publicURL
-                        childImageSharp {
-                            gatsbyImageData(layout: FULL_WIDTH)
-                        }
+            images {
+                extension
+                url
+                width
+                height
+                localFile {
+                    publicURL
+                    childImageSharp {
+                        gatsbyImageData(layout: FULL_WIDTH)
                     }
                 }
-                step
             }
         }
-        allRecipe(sort: {fields: flotiqInternal___createdAt, order: DESC}, limit: 3, filter: {slug: {ne: $slug}}) {
+        allPopup(sort: {fields: flotiqInternal___createdAt, order: DESC}, limit: 3, filter: {id: {ne: $id}}) {
             nodes {
                 id
-                cookingTime
+                title
                 description
-                name
-                slug
-                servings
-                image {
+                thumbnail {
                     extension
                     url
                     width
@@ -143,6 +137,10 @@ export const pageQuery = graphql`
                         }
                     }
                 }
+                address
+                end_date
+                start_date
+                open_time
             }
         }
     }

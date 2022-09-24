@@ -1,24 +1,43 @@
 import React from 'react';
 import { graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import { Announcement, Pagination } from 'flotiq-components-react';
 import Layout from '../layouts/layout';
-// import CategoriesChoiceBar from '../components/CategoriesChoiceBar';
 import RecipeCards from '../sections/RecipeCards';
-import RecipeFeaturedCard from '../components/RecipeFeaturedCard';
+// import RecipeFeaturedCard from '../components/RecipeFeaturedCard';
 
 const IndexPage = ({ data, pageContext }) => {
-    const recipes = data.allRecipe.nodes;
-    // const featuredRecipe = data.recipe;
-    // const recipess = data.featuredRecipe.nodes;
-    // const categoryTabs = [
-    //     { name: 'Breakfast', href: '#', current: true },
-    //     { name: 'Dinner', href: '#', current: false },
-    //     { name: 'Dessert', href: '#', current: false },
-    //     { name: 'Lunch', href: '#', current: false },
-    //     { name: 'Snack', href: '#', current: false },
-    //     { name: 'Vegan', href: '#', current: false },
-    // ];
+    const popups = data.allPopup.nodes;
+    const popupMap = {};
+
+    let now = new Date();
+    let date = new Date(now.setMonth(now.getMonth()+3));
+    for (let index = 1; index <= 12; index++) {
+        const month = date.getMonth() + 1
+        const key = `${date.getFullYear()}.${month >= 10 ? month : '0' + month}`
+        popupMap[key] = []
+        
+        var newDate = new Date(date.setMonth(date.getMonth()-1));
+        date = newDate
+    }
+
+    popups.forEach(ele => {
+        const startMonth = Date.parse(`${ele.start_date.split("-")[0]}-${ele.start_date.split("-")[1]}-01`);
+        const endMonth = Date.parse(`${ele.end_date.split("-")[0]}-${ele.end_date.split("-")[1]}-01`);
+        
+        Object.keys(popupMap).forEach(pm => {
+            const year = pm.split(".")[0];
+            const month = pm.split(".")[1];
+
+            const s = Date.parse(`${year}-${month}-01`)
+            if (startMonth <= s && endMonth >= s) {
+                popupMap[pm].push(ele);
+            }
+        })
+        
+    });
+
+    console.log(popupMap)
+    
     return (
         <Layout additionalClass={['bg-light-gray']}>
             <Helmet>
@@ -28,48 +47,11 @@ const IndexPage = ({ data, pageContext }) => {
                     content={data.site.siteMetadata.description}
                 />
             </Helmet>
-            <Announcement
-                content={(
-                    <span className="leading-normal">
-                        A blog full of
-                        {' '}
-                        <span className="text-secondary font-medium">easy to make recipes</span>
-                        <br />
-                        {' '}
-                        that take the stress out of cooking.
-                    </span>
-                )}
-                rounded="none"
-                textAlignment="center"
-                variant="transparent"
-                additionalClasses={['max-w-3xl mx-auto mt-10 !text-3xl md:!text-4xl !font-light !px-4']}
-            />
-            {/* Uncomment this to add categories to your recipes */}
-            {/* <CategoriesChoiceBar additionalClass={['my-5']} categoryTabs={categoryTabs} /> */}
-            <RecipeFeaturedCard
-                title={recipes[0].name}
-                excerpt={recipes[0].description}
-                tags={['#dinner', '#vegan', '#lunch', '#glutenfree']}
-                preparationTime={recipes[0].cookingTime}
-                portions={recipes[0].servings}
-                image={recipes[0].image[0]?.localFile}
-                imageAlt={recipes[0].name}
-                slug={recipes[0].slug}
-            />
-            <RecipeCards recipes={recipes} headerText="Newest recipes" />
-            <Pagination
-                page={pageContext.currentPage}
-                numOfPages={pageContext.numPages}
-                borderVariant="transparent"
-                next="ᐳ"
-                prev="ᐸ"
-                rounded="none"
-                variant="transparent"
-                additionalClasses={['font-light']}
-                prevNextAdditionalClasses={['!bg-primary px-3 md:px-4 !w-auto !text-white']}
-                activeAdditionalClasses={['!font-semibold before:block before:absolute '
-                + 'before:w-2 before:h-2 before:-bottom-2 before:bg-primary']}
-            />
+            {Object.keys(popupMap).map(ele => {
+                if (popupMap[ele].length === 0) return
+                return <RecipeCards popups={popupMap[ele]} headerText={ele} />
+            })}
+            
         </Layout>
     );
 };
@@ -82,15 +64,12 @@ export const pageQuery = graphql`
                 description
             }
         }
-        allRecipe(sort: {fields: flotiqInternal___createdAt, order: DESC}, limit: $limit, skip: $skip) {
+        allPopup(sort: {fields: flotiqInternal___createdAt, order: DESC}, limit: $limit, skip: $skip) {
             nodes {
                 id
-                cookingTime
+                title
                 description
-                name
-                slug
-                servings
-                image {
+                thumbnail {
                     extension
                     url
                     width
@@ -102,9 +81,16 @@ export const pageQuery = graphql`
                         }
                     }
                 }
+                address
+                end_date
+                start_date
+                open_time
+                tags {
+                    name
+                }
             }
         }
-        file(name: {eq: "recipe-image"}) {
+        file(name: {eq: "thumbnail"}) {
             childImageSharp {
                 gatsbyImageData(height: 375, layout: CONSTRAINED)
             }

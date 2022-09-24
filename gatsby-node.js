@@ -3,13 +3,13 @@ const path = require('path');
 exports.createPages = async ({ graphql, actions }) => {
     const { createPage } = actions;
 
-    const singleRecipe = path.resolve('./src/templates/recipe.js');
+    const singlePopup = path.resolve('./src/templates/recipe.js');
     const result = await graphql(`
-        query GetRecipes {
-            allRecipe(sort: {order: DESC, fields: flotiqInternal___createdAt}) {
+        query GetPopups {
+            allPopup(sort: {order: DESC, fields: flotiqInternal___createdAt}) {
                 edges {
                     node {
-                        slug
+                        id
                     }
                 }
             }
@@ -19,19 +19,19 @@ exports.createPages = async ({ graphql, actions }) => {
     if (result.errors) {
         throw result.errors;
     }
-    const recipes = result.data.allRecipe.edges;
+    const popups = result.data.allPopup.edges;
 
     // Create paginated index
-    const recipesPerPage = 7;
-    const numPages = Math.ceil(recipes.length / recipesPerPage);
+    const popupsPerPage = 1000;
+    const numPages = Math.ceil(popups.length / popupsPerPage);
 
     Array.from({ length: numPages }).forEach((item, i) => {
         createPage({
             path: i === 0 ? '/' : `/${i + 1}`,
             component: path.resolve('./src/templates/index.js'),
             context: {
-                limit: recipesPerPage,
-                skip: i * recipesPerPage,
+                limit: popupsPerPage,
+                skip: i * popupsPerPage,
                 numPages,
                 currentPage: i + 1,
             },
@@ -39,15 +39,15 @@ exports.createPages = async ({ graphql, actions }) => {
     });
 
     // Create recipes pages.
-    recipes.forEach((recipe, index) => {
-        const previous = index === recipes.length - 1 ? null : recipes[index + 1].node;
-        const next = index === 0 ? null : recipes[index - 1].node;
+    popups.forEach((popup, index) => {
+        const previous = index === popups.length - 1 ? null : popups[index + 1].node;
+        const next = index === 0 ? null : popups[index - 1].node;
 
         createPage({
-            path: recipe.node.slug,
-            component: singleRecipe,
+            path: popup.node.id,
+            component: singlePopup,
             context: {
-                slug: recipe.node.slug,
+                id: popup.node.id,
                 previous,
                 next,
             },

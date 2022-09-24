@@ -2,13 +2,10 @@ import React from 'react';
 import { Header, Paragraph } from 'flotiq-components-react';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
-const RecipeSteps = ({ additionalClass, steps, headerText }) => (
-    <div className={['flex flex-wrap max-w-7xl mx-auto '
+const RecipeSteps = ({ additionalClass, steps }) => (
+    <div className={['flex flex-wrap max-w-4xl mx-auto '
     + 'bg-white py-5', ...additionalClass].join(' ')}
     >
-        <Header level={4} additionalClasses={['uppercase font-normal px-5 pb-5 md:px-10']}>
-            {headerText}
-        </Header>
         {steps.map((step, index) => (
             <div className="w-full" key={step.step}>
                 <Paragraph additionalClasses={['px-5 md:px-10 pb-5 md:px-14']}>
