@@ -44,6 +44,7 @@ const IndexPage = ({ data, pageContext }) => {
                     name="description"
                     content={data.site.siteMetadata.description}
                 />
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4051015339001057" crossorigin="anonymous"></script>
             </Helmet>
             {Object.keys(popupMap).map(ele => {
                 if (popupMap[ele].length === 0) return
