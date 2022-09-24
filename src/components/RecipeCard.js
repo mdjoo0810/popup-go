@@ -23,7 +23,7 @@ const CustomRecipeCard = ({ id, title, thumbnail, start_date, end_date, address,
                 ]}
             >
                 <Link to={`/${id}`}>
-                    <div className="flex flex-wrap justify-start text-xs font-light space-x-5 pb-3">
+                    <div className="flex flex-wrap justify-start text-xs font-light space-x-2 pb-3">
                         <p className="px-4 py-2 bg-light-gray">
                             일정:
                             {' '}
