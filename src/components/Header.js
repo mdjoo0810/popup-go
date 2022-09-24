@@ -44,7 +44,8 @@ const PageHeader = () => (
                         <div className="order-1 md:order-3 flex items-center">
                             <div className="flex-shrink-0">
                                 <a
-                                    href=""
+                                    href="https://forms.gle/CSbDC1DDfzbDJkiN7"
+                                    target="_blank"
                                     className="relative inline-flex items-center px-4 py-2
                                     text-base md:text-lg font-regular hover:text-secondary"
                                 >
