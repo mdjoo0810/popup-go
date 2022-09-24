@@ -6,7 +6,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import ReactMarkdown from "react-markdown";
 import Layout from '../layouts/layout';
 import RecipeBackButton from '../components/recipe/RecipeBackButton';
-// import RecipeSteps from '../components/recipe/RecipeSteps';
+import RecipeSteps from '../components/recipe/RecipeSteps';
 // import HeaderImageWithText from '../components/recipe/HeaderImageWithText';
 import RecipeCards from '../sections/RecipeCards';
 
@@ -14,6 +14,7 @@ const RecipeTemplate = ({ data }) => {
     const { popup } = data;
     const popups = data.allPopup.nodes;
 
+    console.log(popup)
     return (
         <Layout additionalClass={['bg-light-gray']}>
             <Helmet>
@@ -63,9 +64,9 @@ const RecipeTemplate = ({ data }) => {
                     </ReactMarkdown>
                 </div>
             </div>
-            {/* <div className="flex flex-wrap max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-                <RecipeSteps steps={recipe.steps} additionalClass={['my-5']} />
-            </div> */}
+            <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+                <RecipeSteps images={popup.images} />
+            </div>
             {/* <HeaderImageWithText
                 recipe={recipe}
                 headerText1="Enjoy"
@@ -108,10 +109,6 @@ export const pageQuery = graphql`
                 name
             }
             images {
-                extension
-                url
-                width
-                height
                 localFile {
                     publicURL
                     childImageSharp {
