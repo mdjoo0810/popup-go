@@ -42,7 +42,7 @@ const RecipeTemplate = ({ data }) => {
                             일정:
                             {' '}
                             <span className="font-semibold">
-                                {`${popup.start_date.split("-")[1]}/${popup.start_date.split("-")[2]}-${popup.end_date.split("-")[1]}/${popup.end_date.split("-")[2]}`}
+                                {`${popup.start_date.split("-")[1]}.${popup.start_date.split("-")[2]}-${popup.end_date.split("-")[1]}.${popup.end_date.split("-")[2]}`}
                             </span>
                         </p>
                     </div>

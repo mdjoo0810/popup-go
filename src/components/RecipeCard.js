@@ -4,7 +4,6 @@ import { Card } from 'flotiq-components-react';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const CustomRecipeCard = ({ id, title, thumbnail, start_date, end_date, address, tags }) => {
-    console.log(tags)
     return(
     
         <Card
@@ -28,7 +27,7 @@ const CustomRecipeCard = ({ id, title, thumbnail, start_date, end_date, address,
                         <p className="px-4 py-2 bg-light-gray">
                             일정:
                             {' '}
-                            <span className="font-semibold text-sm">{`${start_date.split("-")[1]}/${start_date.split("-")[2]}-${end_date.split("-")[1]}/${end_date.split("-")[2]}`}</span>
+                            <span className="font-semibold text-sm">{`${start_date.split("-")[1]}.${start_date.split("-")[2]}-${end_date.split("-")[1]}.${end_date.split("-")[2]}`}</span>
                         </p>
                         <p className="px-4 py-2 bg-light-gray">
                             위치:

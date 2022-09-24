@@ -35,8 +35,6 @@ const IndexPage = ({ data, pageContext }) => {
         })
         
     });
-
-    console.log(popupMap)
     
     return (
         <Layout additionalClass={['bg-light-gray']}>
