@@ -63,7 +63,7 @@ export const pageQuery = graphql`
                 description
             }
         }
-        allPopup(sort: {fields: flotiqInternal___createdAt, order: DESC}, limit: $limit, skip: $skip) {
+        allPopup(sort: {fields: end_date, order: DESC}, limit: $limit, skip: $skip) {
             nodes {
                 id
                 title

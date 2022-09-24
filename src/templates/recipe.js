@@ -117,7 +117,7 @@ export const pageQuery = graphql`
                 }
             }
         }
-        allPopup(sort: {fields: flotiqInternal___createdAt, order: DESC}, limit: 3, filter: {id: {ne: $id}}) {
+        allPopup(sort: {fields: end_date, order: DESC}, limit: 3, filter: {id: {ne: $id}}) {
             nodes {
                 id
                 title
