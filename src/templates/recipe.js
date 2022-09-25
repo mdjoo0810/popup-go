@@ -41,7 +41,7 @@ const RecipeTemplate = ({ data }) => {
     return (
         <Layout additionalClass={['bg-light-gray']}>
             <Helmet>
-                <title>{popup.title}</title>
+                <title>{`${popup.title} | 국내 모든 팝업스토어와 전시`}</title>
                 <meta
                     name="description"
                     content={`${popup.description.split("**")[1].split("**")[0]} | ${popup.tags.map(e => e.name).join(", ")} | 국내 팝업스토어, 전시`}
