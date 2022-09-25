@@ -44,7 +44,7 @@ const RecipeTemplate = ({ data }) => {
                 <title>{popup.title}</title>
                 <meta
                     name="description"
-                    content={popup.description}
+                    content={`${popup.description.split("**")[1].split("**")[0]} | ${popup.tags.map(e => e.name).join(", ")} | 국내 팝업스토어, 전시`}
                 />
                 
             </Helmet>

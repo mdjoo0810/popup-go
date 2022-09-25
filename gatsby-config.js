@@ -11,8 +11,8 @@ require('dotenv').config({
 
 module.exports = {
     siteMetadata: {
-        title: 'POP-UP GO',
-        description: '팝업스토어 모음, 팝업고와 함께',
+        title: 'POP-UP GO | 국내 모든 팝업스토어와 전시',
+        description: '국내 팝업스토어 및 전시 모음, 팝업고와 함께',
         siteUrl: 'https://popupgo.kr',
     },
     plugins: [
