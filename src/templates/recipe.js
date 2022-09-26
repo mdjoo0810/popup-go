@@ -4,15 +4,24 @@ import { Header, List, Paragraph } from 'flotiq-components-react';
 import { Helmet } from 'react-helmet';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import ReactMarkdown from "react-markdown";
+import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
+
 import Layout from '../layouts/layout';
 import RecipeBackButton from '../components/recipe/RecipeBackButton';
 import RecipeSteps from '../components/recipe/RecipeSteps';
+
 // import HeaderImageWithText from '../components/recipe/HeaderImageWithText';
 import RecipeCards from '../sections/RecipeCards';
 
 const RecipeTemplate = ({ data }) => {
     const { popup } = data;
     const popups = data.allPopup.nodes;
+
+    let disqusConfig = {
+        url: `${data.site.siteMetadata.siteUrl+location.pathname}`,
+        identifier: popup.id,
+        title: popup.title,
+      }
 
     useEffect(() => {
         const script = document.createElement('script');
@@ -103,7 +112,12 @@ const RecipeTemplate = ({ data }) => {
                 headerText2="your"
                 headerText3="meal!"
             /> */}
+            <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+                <CommentCount config={disqusConfig} placeholder={'...'} />
+                <Disqus config={disqusConfig} />
+            </div>
             <RecipeCards popups={popups} headerText="최근 오픈한 팝업 스토어" />
+            
         </Layout>
     );
 };
