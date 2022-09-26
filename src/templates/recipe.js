@@ -118,7 +118,7 @@ const RecipeTemplate = ({ data }) => {
                     config={disqusConfig}
                 />
             </div>
-            <RecipeCards popups={popups} headerText="최근 오픈한 팝업 스토어" />
+            <RecipeCards popups={popups} headerText="최근 등록된 추천 플레이스" />
             
         </Layout>
     );
@@ -167,7 +167,7 @@ export const pageQuery = graphql`
                 }
             }
         }
-        allPopup(sort: {fields: end_date, order: DESC}, limit: 3, filter: {id: {ne: $id}}) {
+        allPopup(sort: {fields: flotiqInternal___createdAt, order: DESC}, limit: 3, filter: {id: {ne: $id}}) {
             nodes {
                 id
                 title
