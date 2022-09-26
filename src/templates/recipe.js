@@ -22,8 +22,6 @@ const RecipeTemplate = ({ data }) => {
         identifier: popup.id,
         title: popup.title,
       }
-
-      console.log(disqusConfig)
     useEffect(() => {
         const script = document.createElement('script');
     
@@ -86,10 +84,10 @@ const RecipeTemplate = ({ data }) => {
                         {popup.title}
                     </Header>
                     <Paragraph>
-                        📍 {popup.address}
+                        {`📍 ${popup.address}`}
                     </Paragraph>
                     <Paragraph>
-                        ⏰ {popup.open_time}
+                        {`⏰ ${popup.open_time}`}
                     </Paragraph>
                     <Header level={4} additionalClasses={['uppercase mt-8 mb-2']}>
                         설명
