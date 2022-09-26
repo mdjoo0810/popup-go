@@ -18,7 +18,7 @@ const RecipeTemplate = ({ data }) => {
     const popups = data.allPopup.nodes;
 
     let disqusConfig = {
-        url: `${data.site.siteMetadata.siteUrl+location.pathname}`,
+        url: `${data.site.siteMetadata.siteUrl}/${popup.id}`,
         identifier: popup.id,
         title: popup.title,
       }
