@@ -7,34 +7,34 @@ import RecipeCards from '../sections/RecipeCards';
 
 const IndexPage = ({ data, pageContext }) => {
     const popups = data.allPopup.nodes;
-    const popupMap = {};
+    // const popupMap = {};
 
-    let now = new Date();
-    let date = new Date(now.setMonth(now.getMonth()+1));
-    for (let index = 1; index <= 6; index++) {
-        const month = date.getMonth() + 1
-        const key = `${date.getFullYear()}.${month >= 10 ? month : '0' + month}`
-        popupMap[key] = []
+    // let now = new Date();
+    // let date = new Date(now.setMonth(now.getMonth()+1));
+    // for (let index = 1; index <= 6; index++) {
+    //     const month = date.getMonth() + 1
+    //     const key = `${date.getFullYear()}.${month >= 10 ? month : '0' + month}`
+    //     popupMap[key] = []
         
-        var newDate = new Date(date.setMonth(date.getMonth()-1));
-        date = newDate
-    }
+    //     var newDate = new Date(date.setMonth(date.getMonth()-1));
+    //     date = newDate
+    // }
 
-    popups.forEach(ele => {
-        const startMonth = Date.parse(`${ele.start_date.split("-")[0]}-${ele.start_date.split("-")[1]}-01`);
-        const endMonth = Date.parse(`${ele.end_date.split("-")[0]}-${ele.end_date.split("-")[1]}-01`);
+    // popups.forEach(ele => {
+    //     const startMonth = Date.parse(`${ele.start_date.split("-")[0]}-${ele.start_date.split("-")[1]}-01`);
+    //     const endMonth = Date.parse(`${ele.end_date.split("-")[0]}-${ele.end_date.split("-")[1]}-01`);
         
-        Object.keys(popupMap).forEach(pm => {
-            const year = pm.split(".")[0];
-            const month = pm.split(".")[1];
+    //     Object.keys(popupMap).forEach(pm => {
+    //         const year = pm.split(".")[0];
+    //         const month = pm.split(".")[1];
 
-            const s = Date.parse(`${year}-${month}-01`)
-            if (startMonth <= s && endMonth >= s) {
-                popupMap[pm].push(ele);
-            }
-        })
+    //         const s = Date.parse(`${year}-${month}-01`)
+    //         if (startMonth <= s && endMonth >= s) {
+    //             popupMap[pm].push(ele);
+    //         }
+    //     })
         
-    });
+    // });
     
     return (
         <Layout additionalClass={['bg-light-gray']}>
@@ -45,10 +45,11 @@ const IndexPage = ({ data, pageContext }) => {
                     content={data.site.siteMetadata.description}
                 />
             </Helmet>
-            {Object.keys(popupMap).map((ele, index) => {
+            <RecipeCards popups={popups} headerText={"POPs & EXs"}/>
+            {/* {Object.keys(popupMap).map((ele, index) => {
                 if (popupMap[ele].length === 0) return
                 return <RecipeCards popups={popupMap[ele]} headerText={ele} key={index}/>
-            })}
+            })} */}
             
         </Layout>
     );
