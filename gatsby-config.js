@@ -17,12 +17,6 @@ module.exports = {
     },
     plugins: [
         {
-            resolve: `gatsby-plugin-disqus`,
-            options: {
-                shortname: `popupgo`
-            }
-        },
-        {
             // How to configure? https://www.gatsbyjs.com/plugins/gatsby-plugin-google-gtag/
             // Video: https://www.youtube.com/watch?v=Dwi99jtl3Fs
             resolve: 'gatsby-plugin-google-gtag',

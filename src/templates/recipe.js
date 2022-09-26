@@ -4,7 +4,7 @@ import { Header, List, Paragraph } from 'flotiq-components-react';
 import { Helmet } from 'react-helmet';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 import ReactMarkdown from "react-markdown";
-import { Disqus, CommentCount } from 'gatsby-plugin-disqus'
+import { DiscussionEmbed } from "disqus-react"
 
 import Layout from '../layouts/layout';
 import RecipeBackButton from '../components/recipe/RecipeBackButton';
@@ -18,9 +18,12 @@ const RecipeTemplate = ({ data }) => {
     const popups = data.allPopup.nodes;
 
     let disqusConfig = {
-        url: `${data.site.siteMetadata.siteUrl}/${popup.id}`,
-        identifier: popup.id,
-        title: popup.title,
+        shortname: 'popupgo',
+        config : {
+            url: `${data.site.siteMetadata.siteUrl}/${popup.id}`,
+            identifier: popup.id,
+            title: popup.title,
+        }
       }
 
     useEffect(() => {
@@ -113,8 +116,7 @@ const RecipeTemplate = ({ data }) => {
                 headerText3="meal!"
             /> */}
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-                <CommentCount config={disqusConfig} placeholder={'...'} />
-                <Disqus config={disqusConfig} />
+                <DiscussionEmbed {...disqusConfig} />
             </div>
             <RecipeCards popups={popups} headerText="최근 오픈한 팝업 스토어" />
             
