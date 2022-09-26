@@ -36,7 +36,8 @@ const RecipeTemplate = ({ data }) => {
             kakao.maps.load(() => {
                 let el = document.getElementById('map');
                 let map = new kakao.maps.Map(el, {
-                    center: new kakao.maps.LatLng(popup.geo.lat, popup.geo.lon)
+                    center: new kakao.maps.LatLng(popup.geo.lat, popup.geo.lon),
+                    draggable: false
                 })
 
                 let marker = new kakao.maps.Marker({
@@ -85,10 +86,10 @@ const RecipeTemplate = ({ data }) => {
                         {popup.title}
                     </Header>
                     <Paragraph>
-                        {popup.address}
+                        📍 {popup.address}
                     </Paragraph>
                     <Paragraph>
-                        {popup.open_time}
+                        ⏰ {popup.open_time}
                     </Paragraph>
                     <Header level={4} additionalClasses={['uppercase mt-8 mb-2']}>
                         설명
