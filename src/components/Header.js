@@ -54,6 +54,9 @@ const PageHeader = () => (
                             </div>
                         </div>
                     </div>
+                    <div className='font-semibold px-4'>
+                        국내 모든 팝업스토어와 전시회 모음
+                    </div>
                 </div>
             </>
         )}
