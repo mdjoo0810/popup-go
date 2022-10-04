@@ -5,7 +5,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const CustomRecipeCard = ({ id, title, thumbnail, start_date, end_date, address, tags }) => {
     const moveDetail = () => {
-        window.moveToDetail.postMessage(`https://popupgo.kr/${id}`)
+        window.moveToDetail.postMessage(`https://popupgo.kr/${id},${title}`)
     }
     return(
     
