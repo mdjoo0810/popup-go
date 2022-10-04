@@ -4,25 +4,28 @@ import { Card } from 'flotiq-components-react';
 import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 const CustomRecipeCard = ({ id, title, thumbnail, start_date, end_date, address, tags }) => {
+    const moveDetail = () => {
+        window.moveToDetail.postMessage(`https://popupgo.kr/${id}`)
+    }
     return(
     
         <Card
             bordered={false}
             additionalClasses={['mb-4 cursor-pointer basis-full md:basis-1/2 lg:basis-1/3 px-2 !bg-transparent']}
         >
-            <Link to={`/${id}`}>
+            <a onClick={moveDetail}>
                 <GatsbyImage
                     image={getImage(thumbnail)}
                     alt={title}
                     className="w-full"
                 />
-            </Link>
+            </a>
             <Card.Body
                 additionalClasses={[
                     'flex flex-col items-start justify-between order-2 lg:order-1 px-5 pt-10 pb-2 border-b-4 bg-white',
                 ]}
             >
-                <Link to={`/${id}`}>
+                <a onClick={moveDetail}>
                     <div className="flex flex-wrap justify-start text-xs font-light space-x-2 pb-3">
                         <p className="px-4 py-2 bg-light-gray">
                             일정:
@@ -38,7 +41,7 @@ const CustomRecipeCard = ({ id, title, thumbnail, start_date, end_date, address,
                     <Card.Title additionalClasses={['font-normal']}>
                         {title}
                     </Card.Title>
-                </Link>
+                </a>
                  <div className="flex flex-wrap justify-start text-sm font-light mt-5"> 
                     {tags && tags.map((tag) => ( 
                         <a 
