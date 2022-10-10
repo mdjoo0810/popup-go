@@ -1,121 +1,84 @@
 /**
  * Configure your Gatsby site with this file.
  *
- * See: https://www.gatsbyjs.com/docs/gatsby-config/
+ * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
 
-// eslint-disable-next-line import/no-extraneous-dependencies
-require('dotenv').config({
-    path: `.env.${process.env.NODE_ENV}`,
-});
-
 module.exports = {
-    siteMetadata: {
-        title: 'POP-UP GO | 국내 모든 팝업스토어와 전시',
-        description: '국내 팝업스토어 및 전시 모음, 팝업고와 함께',
-        siteUrl: 'https://popupgo.kr',
+  /* Your site config here */
+  siteMetadata: {
+    title: `Bonneville`,
+    titleTemplate: `%s | A starter theme for Gatsby`,
+    description: `A starter theme for Gatsby`,
+    siteUrl: `https://bonneville.netlify.com`,
+    image: `/images/color.jpg`,
+    author: `Morgan Baker`,
+    authorSite: `https://www.morganbaker.dev`,
+    twitterUsername: `@bonneville`,
+    twitterURL: `https://twitter.com/`,
+    linkedInURL: `https://www.linkedin.com/in/morgan-baker-development/`,
+    githubURL: `https://github.com/bagseye`,
+  },
+  plugins: [
+    `gatsby-plugin-netlify`,
+    `gatsby-plugin-styled-components`,
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `Bonneville - Gatsby Starter Theme`,
+        short_name: `Bonneville`,
+        start_url: `/`,
+        background_color: `#0027EC`,
+        theme_color: `#0027EC`,
+        display: `standalone`,
+        icon: `static/favicon.ico`,
+      },
     },
-    plugins: [
-        {
-            resolve: `gatsby-plugin-disqus`,
+    `gatsby-plugin-react-helmet`,
+    // `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: "ENTER YOUR GA TRACKING ID HERE",
+        head: false,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
             options: {
-                shortname: `popupgo`
-            }
-        },
-        {
-            // How to configure? https://www.gatsbyjs.com/plugins/gatsby-plugin-google-gtag/
-            // Video: https://www.youtube.com/watch?v=Dwi99jtl3Fs
-            resolve: 'gatsby-plugin-google-gtag',
-            options: {
-                trackingIds: [
-                    process.env.GA_MEASUREMENT_ID || 'test', // GA Measurement
-                ],
-                gtagConfig: {
-                    optimize_id: 'OPT_CONTAINER_ID',
-                    anonymize_ip: true,
-                    cookie_expires: 0,
-                },
-                pluginConfig: {
-                    head: true,
-                    respectDNT: true,
-                    exclude: ['/preview/**', '/do-not-track/me/too/'],
-                },
+              maxWidth: 600,
             },
-        },
-        {
-            resolve: `gatsby-plugin-google-adsense`,
-            options: {
-                publisherId: `ca-pub-4051015339001057`
-            },
-        },
-        'gatsby-plugin-react-helmet',
-        'gatsby-plugin-sitemap',
-        {
-            resolve: 'gatsby-source-flotiq',
-            options: {
-                authToken: process.env.GATSBY_FLOTIQ_API_KEY,
-                downloadMediaFile: true,
-                forceReload: false,
-                includeTypes: [
-                    '_media',
-                    '_tag',
-                    'popup',
-                ],
-            },
-        },
-        {
-            resolve: 'gatsby-source-filesystem',
-            options: {
-                name: 'placeholder',
-                path: `${__dirname}/gatsby-config.js`,
-            },
-        },
-        {
-            resolve: 'gatsby-source-filesystem',
-            options: {
-                name: 'assets',
-                path: `${__dirname}/src/assets`,
-            },
-        },
-        'gatsby-plugin-image',
-        'gatsby-plugin-sharp',
-        'gatsby-transformer-sharp',
-        {
-            resolve: 'gatsby-plugin-robots-txt',
-            options: {
-                host: 'https://flotiqgatsbyrecipe2.gatsbyjs.io',
-                sitemap: 'https://flotiqgatsbyrecipe2.gatsbyjs.io/sitemap.xml',
-                policy: [{ userAgent: '*', allow: '/' }],
-            },
-        },
-        {
-            resolve: 'gatsby-plugin-manifest',
-            options: {
-                icon: 'src/assets/favicons/favicon-16x16.png',
-                icons: [
-                    {
-                        src: 'src/assets/favicons/favicon-32x32.png',
-                        sizes: '32x32',
-                        type: 'image/png',
-                    },
-                    {
-                        src: 'src/assets/favicons/favicon-16x16.png',
-                        sizes: '16x16',
-                        type: 'image/png',
-                    },
-                ],
-            },
-        },
-        'gatsby-plugin-postcss',
-        {
-            resolve: 'gatsby-plugin-gatsby-cloud',
-            options: {
-                headers: {
-                    '/*': [
-                        'x-frame-options: allow-from https://jamstackthemes.dev/',
-                    ],
-                },
-            },
-        },
-    ],
-};
+          },
+        ],
+      },
+    },
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `content`,
+        path: `${__dirname}/src/content`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/pages`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `contentImages`,
+        path: `${__dirname}/src/content/images`,
+      },
+    },
+  ],
+}
