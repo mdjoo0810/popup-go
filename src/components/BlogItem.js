@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import PropTypes from "prop-types"
@@ -31,8 +30,8 @@ const BlogItemStyles = styled.article`
     opacity: 1;
 
     img {
-      transition: transform var(--transSlow) ease, opacity var(--transSlow) ease !important;
-      opacity: 1;
+      transition: transform var(--transSlow) ease !important;
+      // opacity: 1;
     }
   }
 
@@ -40,7 +39,7 @@ const BlogItemStyles = styled.article`
     > figure {
       img {
         transform: scale(1.1);
-        opacity: 0.5 !important;
+        // opacity: 0.5 !important;
       }
     }
   }
