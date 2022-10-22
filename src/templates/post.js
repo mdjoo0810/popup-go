@@ -1,10 +1,8 @@
 import React from "react"
 import { useLocation } from "@reach/router"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 import Seo from "../components/SEO"
 import { GatsbyImage } from "gatsby-plugin-image"
-import Share from "../components/ShareContainer"
-import Banner from "../components/Banner"
 import styled from "styled-components"
 import Layout from "../components/Layout"
 
@@ -18,10 +16,12 @@ const BlogPostStyles = styled.div`
   }
 
   .post-img {
-    margin: calc(var(--spacing) * 2) 0;
-
+    border-radius: 8px;
     @media (min-width: 1200px) {
       margin: calc(var(--spacing) * 4) 0;
+    }
+    img {
+      border-radius: 8px;
     }
   }
 
@@ -75,20 +75,6 @@ export default function Template({ data }) {
       <Seo title={frontmatter.title} description={frontmatter.description} />
       <Layout>
         <BlogPostStyles>
-          {/* <Banner content={frontmatter.title} /> */}
-          
-          {(frontmatter.date || frontmatter.author) && (
-            <aside className="meta">
-              <h2>
-                {/* If there is date, display it */}
-                Posted {frontmatter.date && `/ ${frontmatter.date}`}{" "}
-                {/* If there is author, display it */}
-                {frontmatter.author && `/ ${frontmatter.author}`}
-              </h2>
-            </aside>
-          )}
-
-          {/* If featured image is present, render featured image */}
           {featuredImgFluid && (
             <div className="post-img">
               <GatsbyImage image={featuredImgFluid} />
@@ -98,25 +84,6 @@ export default function Template({ data }) {
             className="blog-post-content"
             dangerouslySetInnerHTML={{ __html: html }}
           />
-
-          {/* If there are tags for the post, render this section */}
-          {/* {frontmatter.tags && (
-            <>
-              <hr />
-              <h4>
-                Posted under /{" "}
-                {frontmatter.tags.map((tagName, index) => {
-                  return (
-                    <Link to={`/tags/${tagName}`} key={index}>
-                      {tagName}
-                    </Link>
-                  )
-                })}
-              </h4>
-            </>
-          )}
-          <hr />
-          <Share facebook twitter linkedin href={location.href} /> */}
         </BlogPostStyles>
       </Layout>
     </>

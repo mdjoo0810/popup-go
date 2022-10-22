@@ -10,6 +10,10 @@ const BlogItemStyles = styled.article`
   grid-template-rows: auto auto auto;
   grid-gap: var(--spacing);
 
+  .btn-link {
+    font-size: 16px;
+  }
+
   @media (min-width: 768px) {
     margin: calc(var(--spacing) * 6) 0;
     grid-template-rows: auto auto;
@@ -28,9 +32,11 @@ const BlogItemStyles = styled.article`
     background-color: #000;
     margin: 0;
     opacity: 1;
+    border-radius: 8px;
 
     img {
       transition: transform var(--transSlow) ease !important;
+      border-radius: 8px;
       // opacity: 1;
     }
   }
@@ -53,6 +59,7 @@ const BlogItemStyles = styled.article`
 
   a {
     text-decoration: none;
+    font-size: 21px;
   }
 
   @media (min-width: 768px) {
@@ -80,6 +87,7 @@ const BlogItemStyles = styled.article`
   .meta {
     display: flex;
     justify-content: space-between;
+    font-size: 12px;
 
     h4 {
       margin: 0;

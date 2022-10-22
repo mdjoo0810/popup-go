@@ -57,6 +57,7 @@ const GlobalStyles = createGlobalStyle`
   p {
     font-size: var(--para);
     line-height: 1.35;
+    color: var(--black);
 
     @media (min-width: 768px) {
       line-height: 1.5;
