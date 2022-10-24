@@ -7,9 +7,9 @@
 module.exports = {
   /* Your site config here */
   siteMetadata: {
-    title: `Bonneville`,
-    titleTemplate: `%s | A starter theme for Gatsby`,
-    description: `A starter theme for Gatsby`,
+    title: `vegan trip`,
+    titleTemplate: `%s`,
+    description: `지구와 나를 지키는 여정, 비건트립`,
     siteUrl: `https://bonneville.netlify.com`,
     image: `/images/color.jpg`,
     author: `Morgan Baker`,
